@@ -24,6 +24,7 @@ import java.util.Map;
 @Transactional
 public class PersonRepository {
     private static final String KEY = "persons";
+
     @Autowired
     private RedisTemplate<String, Person> template;
 

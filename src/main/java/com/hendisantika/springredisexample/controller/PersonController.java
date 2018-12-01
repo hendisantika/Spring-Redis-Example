@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/person")
 public class PersonController {
     List<String> myList = null;
+
     @Autowired
     private PersonService service;
 
