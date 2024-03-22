@@ -3,17 +3,18 @@ package com.hendisantika.springredisexample.controller;
 import com.hendisantika.springredisexample.exception.ServiceException;
 import com.hendisantika.springredisexample.model.Person;
 import com.hendisantika.springredisexample.service.PersonService;
+import jakarta.annotation.PostConstruct;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.PostConstruct;
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,7 +44,7 @@ public class PersonController {
         myList.add("");
     }
 
-    @RequestMapping("/home")
+    @GetMapping("/home")
     public String home(Model model, Person person) {
         model.addAttribute("id", new Random().nextInt(7657));
         model.addAttribute("matchesCount", "Total object available in redis server : " + service.totalCount());
@@ -51,7 +52,7 @@ public class PersonController {
         return "register";
     }
 
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public String addPerson(@Valid Person person, BindingResult bindingResult, Model model) throws ServiceException {
         boolean isExistUser = service.getPersons().stream()
                 .filter(obj -> obj.getEmail().equalsIgnoreCase(person.getEmail())).collect(Collectors.toList())
@@ -79,7 +80,7 @@ public class PersonController {
 
     }
 
-    @RequestMapping("/get/{id}")
+    @GetMapping("/get/{id}")
     public String getPerson(@PathVariable("id") int id, Model model) {
         Person person = service.getPersonById(id);
         List<String> dummylist = new ArrayList<>();
@@ -101,7 +102,7 @@ public class PersonController {
 
     }
 
-    @RequestMapping("/updatePage/{idNo}")
+    @GetMapping("/updatePage/{idNo}")
     public String updatePage(Model model, @PathVariable("idNo") int idNo) {
         Person person = service.getPersonById(idNo);
         int id = person.getId();
@@ -111,7 +112,7 @@ public class PersonController {
         return "register";
     }
 
-    @RequestMapping("/delete")
+    @GetMapping("/delete")
     public String deletePerson(@RequestParam("id") int id, Model model) {
         model.addAttribute("myList", myList);
         model.addAttribute("Message", service.deletePerson(id));
