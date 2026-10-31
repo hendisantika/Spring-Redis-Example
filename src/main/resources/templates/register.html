@@ -60,7 +60,7 @@
 </head>
 <body>
 <ul id="myUl">
-    <li id="myLi"><a th:href="@{/person/getAll}">View All Records</a></li>
+    <li id="myLi"><a th:href="@{/getAll}">View All Records</a></li>
     <li><h1 th:text="${matchesCount}"></h1></li>
 </ul>
 <div class="wrap">
@@ -72,10 +72,10 @@
                     <li class="active">
 
                         <p style="color: navy;" th:text="${text}"></p> <a
-                            th:href="'/person/get/'+${addMessage}"><b
+                            th:href="@{/get/{id}(id=${addMessage})}"><b
                             th:text="${addMessage}"></b></a>
                         <div class="form">
-                            <form action="/person/register" method="post"
+                            <form th:action="@{/register}" method="post"
                                   th:object="${person}">
                                 <input class="active textbox" name="id"
                                        placeholder="Unique ID" th:value="${id}" type="text"/> <input

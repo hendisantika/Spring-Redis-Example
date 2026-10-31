@@ -5,6 +5,7 @@ import com.hendisantika.springredisexample.model.Person;
 import com.hendisantika.springredisexample.service.PersonService;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,12 +32,12 @@ import java.util.stream.Collectors;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping("/person")
+@RequestMapping({"/","/persons"})
+@RequiredArgsConstructor
 public class PersonController {
     List<String> myList = null;
 
-    @Autowired
-    private PersonService service;
+    private final PersonService service;
 
     @PostConstruct
     public void initList() {
@@ -44,7 +45,7 @@ public class PersonController {
         myList.add("");
     }
 
-    @GetMapping("/home")
+    @GetMapping
     public String home(Model model, Person person) {
         model.addAttribute("id", new Random().nextInt(7657));
         model.addAttribute("matchesCount", "Total object available in redis server : " + service.totalCount());

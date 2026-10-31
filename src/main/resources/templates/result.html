@@ -205,14 +205,14 @@
             <div id="wrapper">
                 <div id="left">
                     <a class="no"
-                       style="text-align: left;" th:href="@{/person/delete}+'?id='+${person.id}">Delete</a>
+                       style="text-align: left;" th:href="@{/delete(id=${person.id})}">Delete</a>
                 </div>
                 <div id="right">
                     <a class="yes"
-                       style="text-align: right;" th:href="@{/person/updatePage}+'/'+${person.id}">Update</a>
+                       style="text-align: right;" th:href="@{/updatePage/{idNo}(idNo=${person.id})}">Update</a>
                 </div>
             </div>
-            <br/> <br/> <br/> <a class="button" th:href="@{/person/home}">Continue</a>
+            <br/> <br/> <br/> <a class="button" th:href="@{/}">Continue</a>
         </div>
         <div id="plus">
             <span>NEW<br/>&nbsp;&nbsp;<i class="fa fa-plus"></i></span>
@@ -229,7 +229,7 @@
                 <i class="fa fa-times"></i>
             </div>
             <h2 style="color: navy;" th:text="${Message}"></h2>
-            <br/> <a class="button" th:href="@{/person/home}">OK</a>
+            <br/> <a class="button" th:href="@{/}">OK</a>
         </div>
         <div id="plus">
             <span>NEW<br/>&nbsp;&nbsp;<i class="fa fa-plus"></i></span>
@@ -255,9 +255,9 @@
         <td th:text="${person.name}"></td>
         <td th:text="${person.age}"></td>
         <td th:text="${person.email}"></td>
-        <td><a th:href="@{/person/delete}+'?id='+${person.id}"><img
+        <td><a th:href="@{/delete(id=${person.id})}"><img
                 height="30px" th:src="@{/images/delete.png}" width="40px"/></a></td>
-        <td><a th:href="@{/person/updatePage}+'/'+${person.id}"><img
+        <td><a th:href="@{/updatePage/{idNo}(idNo=${person.id})}"><img
                 height="30px" th:src="@{/images/update.png}" width="40px"/></a></td>
     </tr>
     </tbody>
