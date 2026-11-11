@@ -1,6 +1,6 @@
 services:
   redis:
-    image: 'redis:8.4.7-alpine3.22'
+    image: 'redis:8.4.8-alpine3.22'
     ports:
       - '6379:6379'
     labels:
